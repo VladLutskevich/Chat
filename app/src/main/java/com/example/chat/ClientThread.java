@@ -1,8 +1,11 @@
 package com.example.chat;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientThread implements Runnable {
@@ -43,4 +46,23 @@ public class ClientThread implements Runnable {
 
     public String getStringForce() throws IOException {
         return reader.readLine();
-    }}
+    }
+
+    public void MessageSender(final String string) {
+            try {
+                 final PrintWriter writer = new PrintWriter(new BufferedWriter(
+                        new OutputStreamWriter(socket.getOutputStream())),
+                        true);
+                    final Thread thread = new Thread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        writer.println(string);
+                    }});
+                    thread.start();
+            } catch (IOException e) {
+            }
+            }
+}
+

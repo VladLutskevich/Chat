@@ -9,7 +9,7 @@ public class MessageListener extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] objects) {
         try {
-            string = MainActivity.clientThread.getString();
+            string = MainActivity.clientThread.getStringForce();
         } catch (IOException e) {
             e.printStackTrace();
         }
